@@ -64,4 +64,16 @@ function checkFiled() {
     const filledPercentage = (filledPixels / totalPixels) * 100
 
     console.log(`Filled Percentage: ${filledPercentage}%`)
+
+    document.getElementById("MGDisplayPrc").innerText = `Prosent fyllet: ${filledPercentage}%`
+    setTimeout(restartMG, 4000)
+
+    function restartMG() {
+        document.getElementById("bkMiniGame").style = `
+        z-index: -1;
+        opacity: 0%;`
+        context.clearRect(0, 0, canvas.width, canvas.height)
+        context.fillRect(0, 0, canvas.width, canvas.height)
+        document.getElementById("MGDisplayPrc").innerText = ""
+    }
 }
