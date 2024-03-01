@@ -14,7 +14,7 @@ let is_drawing = "false"
 function intMG() {
     document.getElementById("bkMiniGame").style = `
     z-index: 1;
-    opacity: 80%;`
+    opacity: 1;`
 
     canvas.addEventListener("mousedown", start, false)
     canvas.addEventListener("mousemove", draw, false)

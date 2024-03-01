@@ -31,3 +31,8 @@ function minusPrice() {
 // }
 
 // test()
+
+
+function testPaint() {
+    document.getElementById("paintBall").style.animation = "fallingPaint 4s"
+}

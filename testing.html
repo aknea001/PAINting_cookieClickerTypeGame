@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @keyframes fallingPaint {
+            0% {top: -50px;}
+            100% {top: 140%;}
+        }
+
+        @keyframes trailPaint {
+            to {top: 140%; opacity: 0;}
+        }
+
+        #paintBall {
+            position: absolute;
+            top: -50px;
+            width: 40px;
+            height: 40px;
+            color: red;
+            border-radius: 50%;
+            background-color: red;
+        }
+
+        .trail {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            color: red;
+            border-radius: 50%;
+            background-color: red;
+            opacity: 1;
+            animation: trailPaint 4s forwards;
+        }
+
+        /* Add a positioned container for the trail elements */
+        #trailContainer {
+            position: absolute;
+            left: 300px;
+            height: 100%; /* Adjust based on your needs */
+        }
+    </style>
+</head>
+<body>
+    <div id="trailContainer">
+        <div id="paintBall"></div>
+    </div>
+    <button onclick="testPaint()">test</button>
+
+    <script>
+        function testPaint() {
+            const container = document.getElementById("paintBall");
+            container.style.animation = "fallingPaint 4s";
+
+            // Number of trail elements
+            const trailCount = 10;
+
+            // Get the trail container
+            const trailContainer = document.getElementById("trailContainer");
+
+            for (let i = 0; i < trailCount; i += 1) {
+                const trail = document.createElement('div');
+                trail.className = 'trail';
+                // Set the initial position of the trail element
+                trail.style.left = container.style.left;
+                trail.style.top = container.style.top;
+                // Append the trail element to the trail container
+                trailContainer.appendChild(trail);
+            }
+        }
+    </script>
+</body>
+</html>

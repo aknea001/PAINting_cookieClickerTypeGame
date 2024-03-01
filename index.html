@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="paintBall">.</div>
+
     <div id="bkMiniGame">
         <canvas id="canvas"></canvas>
         <button onclick="checkFiled()">Check percentage</button>
@@ -14,14 +16,21 @@
     </div>
 
     <h1>PAINting</h1>
+
     <p>Penger: <span id="money">40</span>kr</p>
-    <p>Pris: <span id="price">20</span>kr</p>
-    <button onclick="plusPrice()">+</button>
-    <button onclick="minusPrice()">-</button>
+
+    <div style="display: flex;">
+        <p>Pris: <span id="price">20</span>kr</p>
+        <button style="margin-left: 10px;" onclick="plusPrice()">Hev Prisen</button>
+        <button onclick="minusPrice()">Senk Prisen</button>
+    </div>
 
     <button onclick="intMG()">Mini Game</button>
 
-    <script src="script.js"></script>
-    <script src="canvas.js"></script>
+    <button onclick="testPaint()">test</button>
+    <a href="testing.html">testing html</a>
+
+    <script src="js/script.js"></script>
+    <script src="js/canvas.js"></script>
 </body>
 </html>
