@@ -76,6 +76,7 @@
             const paintBall = document.getElementById("paintBall")
             let randomX = Math.floor(Math.random() * window.innerWidth)
 
+            paintBall.style.left = `${randomX - 20}px`
             paintBall.classList.add("goodClassName")
 
             // console.log(randomX)
@@ -125,7 +126,7 @@
                         context.stroke()
 
                         if (fadeOpacity > 0) {
-                            setTimeout(fadeThatShit, 100)
+                            setTimeout(fadeThatShit, 50)
                         }
                         else {
                             context.clearRect(0, 0, canvas.width, canvas.height)
