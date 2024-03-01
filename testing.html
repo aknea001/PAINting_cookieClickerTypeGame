@@ -9,9 +9,9 @@
             100% {top: 110%;}
         }
 
-        @keyframes trailPaint {
+        /* @keyframes trailPaint {
             to {top: 140%; opacity: 0;}
-        }
+        } */
 
         body {
             overflow: hidden;
@@ -27,7 +27,7 @@
             background-color: red;
         }
 
-        .trail {
+        /* .trail {
             position: absolute;
             width: 40px;
             height: 40px;
@@ -38,12 +38,11 @@
             animation: trailPaint 4s forwards;
         }
 
-        /* Add a positioned container for the trail elements */
         #trailContainer {
             position: absolute;
             left: 300px;
-            height: 100%; /* Adjust based on your needs */
-        }
+            height: 100%;
+        } */
 
         .goodClassName {
             animation: fallingPaint 4s;
@@ -61,6 +60,7 @@
 
     <script>
         const canvas = document.getElementById("bkCanvas")
+        const dripColor = "red"
 
         canvas.width = window.innerWidth
         canvas.height = window.innerHeight
@@ -82,18 +82,20 @@
 
             context.beginPath()
             context.moveTo(randomX, 0)
-            context.strokeStyle = "red"
+            context.strokeStyle = dripColor
             context.lineWidth = trailWidth
             context.lineCap = "round"
             context.lineJoin = "round"
 
             let x = 200
+            let fadeOpacity = 1
 
             trail()
 
             function trail() {
                 let ballYcoords = paintBall.getBoundingClientRect().top
-                
+
+                context.globalAlpha = fadeOpacity
                 context.lineTo(randomX, ballYcoords)
                 context.stroke()
                 x -= 1
@@ -104,9 +106,36 @@
                 else {
                     paintBall.classList.remove("goodClassName")
 
-                    for (let i = 1; i < 10; i += 1) {
-                        context.globalAlpha -= 0.1
+                    fadeThatShit()
+                    
+                    function fadeThatShit() {
+                        context.globalAlpha = fadeOpacity
+
+                        context.clearRect(0, 0, canvas.width, canvas.height)
+                        context.fillStyle = "white"
+                        context.fillRect(0, 0, canvas.width, canvas.height)
+                        context.beginPath()
+                        context.moveTo(randomX, 0)
+                        context.strokeStyle = dripColor
+                        context.lineWidth = trailWidth
+                        context.lineCap = "round"
+                        context.lineJoin = "round"
+                        context.lineTo(randomX, window.innerHeight)
+                        fadeOpacity -= 0.1
+                        context.stroke()
+
+                        if (fadeOpacity > 0) {
+                            setTimeout(fadeThatShit, 100)
+                        }
+                        else {
+                            context.clearRect(0, 0, canvas.width, canvas.height)
+                            context.fillStyle = "white"
+                            context.fillRect(0, 0, canvas.width, canvas.height)
+
+                            console.log("sup")
+                        }
                     }
+
                 }
             }
         }
