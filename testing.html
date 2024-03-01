@@ -6,11 +6,15 @@
     <style>
         @keyframes fallingPaint {
             0% {top: -50px;}
-            100% {top: 140%;}
+            100% {top: 110%;}
         }
 
         @keyframes trailPaint {
             to {top: 140%; opacity: 0;}
+        }
+
+        body {
+            overflow: hidden;
         }
 
         #paintBall {
@@ -40,35 +44,156 @@
             left: 300px;
             height: 100%; /* Adjust based on your needs */
         }
+
+        .goodClassName {
+            animation: fallingPaint 4s;
+        }
     </style>
 </head>
 <body>
-    <div id="trailContainer">
-        <div id="paintBall"></div>
-    </div>
+    <canvas style="position: absolute; z-index: -1; left: 0; top: 0;" id="bkCanvas"></canvas>
+    <div id="paintBall">.</div>
+
     <button onclick="testPaint()">test</button>
 
+    <a href="index.html">back</a>
+
+
     <script>
+        const canvas = document.getElementById("bkCanvas")
+
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+
+        let context = canvas.getContext("2d")
+        context.fillStyle = "white"
+        context.fillRect(0, 0, canvas.width, canvas.height)
+
+        let trailWidth = 35
+
+
         function testPaint() {
-            const container = document.getElementById("paintBall");
-            container.style.animation = "fallingPaint 4s";
+            const paintBall = document.getElementById("paintBall")
+            let randomX = Math.floor(Math.random() * window.innerWidth)
 
-            // Number of trail elements
-            const trailCount = 10;
+            paintBall.classList.add("goodClassName")
 
-            // Get the trail container
-            const trailContainer = document.getElementById("trailContainer");
+            // console.log(randomX)
 
-            for (let i = 0; i < trailCount; i += 1) {
-                const trail = document.createElement('div');
-                trail.className = 'trail';
-                // Set the initial position of the trail element
-                trail.style.left = container.style.left;
-                trail.style.top = container.style.top;
-                // Append the trail element to the trail container
-                trailContainer.appendChild(trail);
+            context.beginPath()
+            context.moveTo(randomX, 0)
+            context.strokeStyle = "red"
+            context.lineWidth = trailWidth
+            context.lineCap = "round"
+            context.lineJoin = "round"
+
+            let x = 200
+
+            trail()
+
+            function trail() {
+                let ballYcoords = paintBall.getBoundingClientRect().top
+                
+                context.lineTo(randomX, ballYcoords)
+                context.stroke()
+                x -= 1
+
+                if (x >= 1) {
+                    setTimeout(trail, 20)
+                }
+                else {
+                    paintBall.classList.remove("goodClassName")
+
+                    for (let i = 1; i < 10; i += 1) {
+                        context.globalAlpha -= 0.1
+                    }
+                }
             }
         }
     </script>
+
+
+
+
+
+<!-- const canvas = document.getElementById("canvas")
+
+canvas.width = 500
+canvas.height = 500
+
+let context = canvas.getContext("2d")
+context.fillStyle = "white"
+context.fillRect(0, 0, canvas.width, canvas.height)
+
+let color = "black"
+let drawWidth = "100"
+let isDrawing = "false"
+
+function intMG() {
+    document.getElementById("bkMiniGame").style = `
+    z-index: 1;
+    opacity: 1;`
+
+    canvas.addEventListener("mousedown", start, false)
+    canvas.addEventListener("mousemove", draw, false)
+    canvas.addEventListener("mouseup", stopDrawing, false)
+}
+
+function start(event) {
+    is_drawing = true
+    context.beginPath()
+    context. moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop)
+    event.preventDefault()
+}
+
+function draw(event) {
+    if (is_drawing) {
+        context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop)
+        context.strokeStyle = color
+        context.lineWidth = draw_width
+        context.lineCap = "round"
+        context.lineJoin = "round"
+        context.stroke()
+    }
+    event.preventDefault()
+}
+
+function stopDrawing(event) {
+    if (is_drawing) {
+        context.stroke()
+        context.closePath()
+        is_drawing = false
+    }
+    event.preventDefault()
+}
+
+function checkFiled() {
+    const data = context.getImageData(0, 0, canvas.width, canvas.height).data
+
+    let filledPixels = 0
+
+    for (let i = 0; i < data.length; i += 4) {
+        if (data[i] !== 255 || data[i + 1] !== 255 || data[i + 2] !== 255) {
+            filledPixels += 1
+        }
+    }
+
+    const totalPixels = canvas.width * canvas.height
+    const filledPercentage = (filledPixels / totalPixels) * 100
+
+    console.log(`Filled Percentage: ${filledPercentage}%`)
+
+    document.getElementById("MGDisplayPrc").innerText = `Prosent fyllet: ${filledPercentage}%`
+    setTimeout(restartMG, 4000)
+
+    function restartMG() {
+        document.getElementById("bkMiniGame").style = `
+        z-index: -1;
+        opacity: 0%;`
+        context.clearRect(0, 0, canvas.width, canvas.height)
+        context.fillRect(0, 0, canvas.width, canvas.height)
+        document.getElementById("MGDisplayPrc").innerText = ""
+    }
+} -->
 </body>
 </html>

@@ -24,7 +24,7 @@ function intMG() {
 function start(event) {
     is_drawing = true
     context.beginPath()
-    context. moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop)
+    context.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop)
     event.preventDefault()
 }
 
