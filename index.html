@@ -7,8 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="paintBall">.</div>
-
     <div id="bkMiniGame">
         <canvas id="canvas"></canvas>
         <button onclick="checkFiled()">Check percentage</button>
@@ -30,6 +28,10 @@
     <button onclick="testPaint()">test</button>
     <a href="testing.html">testing html</a>
 
+
+    <canvas style="position: absolute; z-index: -2; left: 0; top: 0;" id="bkCanvas"></canvas>
+    <div id="paintBall">.</div>
+    <button style="display: flex; justify-content: baseline;" onclick="dripPaint()">test paint drip</button>
     <script src="js/script.js"></script>
     <script src="js/canvas.js"></script>
 </body>

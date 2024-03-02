@@ -77,3 +77,97 @@ function checkFiled() {
         document.getElementById("MGDisplayPrc").innerText = ""
     }
 }
+
+
+// -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_PAINT DRIP IN BACKGROUND-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-__-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+
+const dripColor = "red"
+let readyForDrip = true
+
+const bkCanvas = document.getElementById("bkCanvas")
+
+bkCanvas.width = window.innerWidth
+bkCanvas.height = window.innerHeight
+
+let bkctx = bkCanvas.getContext("2d")
+bkctx.fillStyle = "white"
+bkctx.fillRect(0, 0, bkCanvas.width, bkCanvas.height)
+
+let trailWidth = 35
+
+
+function dripPaint() {
+    let fadeOpacity
+    let randomX
+    let dripSpeed = 4
+    let trailUpdates = dripSpeed * 1000 / 20
+
+    if (readyForDrip) {
+        const paintBall = document.getElementById("paintBall")
+        randomX = Math.floor(Math.random() * window.innerWidth)
+
+        document.documentElement.style.setProperty("--animationSpeed", `${dripSpeed}s`)
+        paintBall.style.left = `${randomX - 20}px`
+        paintBall.classList.add("dripAni")
+
+        // console.log(randomX)
+
+        bkctx.beginPath()
+        bkctx.strokeStyle = dripColor
+        bkctx.lineWidth = trailWidth
+        bkctx.lineCap = "round"
+
+        fadeOpacity = 1
+
+        trail()
+    }
+
+    function trail() {
+        readyForDrip = false
+
+        let ballYcoords = paintBall.getBoundingClientRect().top
+
+        bkctx.globalAlpha = fadeOpacity
+        bkctx.lineTo(randomX, ballYcoords + 20)
+        bkctx.stroke()
+        trailUpdates -= 1
+
+        if (trailUpdates >= 1) {
+            setTimeout(trail, 20)
+        }
+        else {
+            paintBall.classList.remove("dripAni")
+
+            fadeThatShit()
+            
+            function fadeThatShit() {
+                bkctx.globalAlpha = fadeOpacity
+
+                bkctx.clearRect(0, 0, bkCanvas.width, bkCanvas.height)
+                bkctx.fillStyle = "white"
+                bkctx.fillRect(0, 0, bkCanvas.width, bkCanvas.height)
+                bkctx.beginPath()
+                bkctx.moveTo(randomX, 0)
+                bkctx.strokeStyle = dripColor
+                bkctx.lineWidth = trailWidth
+                bkctx.lineCap = "round"
+                bkctx.lineTo(randomX, window.innerHeight)
+                fadeOpacity -= 0.1
+                bkctx.stroke()
+
+                if (fadeOpacity > 0) {
+                    setTimeout(fadeThatShit, 50)
+                }
+                else {
+                    bkctx.clearRect(0, 0, bkCanvas.width, bkCanvas.height)
+                    bkctx.fillStyle = "white"
+                    bkctx.fillRect(0, 0, bkCanvas.width, bkCanvas.height)
+
+                    readyForDrip = true
+                }
+            }
+
+        }
+    }
+}

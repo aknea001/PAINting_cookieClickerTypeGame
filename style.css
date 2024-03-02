@@ -1,6 +1,10 @@
+:root {
+    --animationSpeed: 4s
+}
+
 @keyframes fallingPaint {
-    0% {top: -50;}
-    100% {top: 140%;}
+    0% {top: -50px;}
+    100% {top: 110%;}
 }
 
 html, body {
@@ -23,11 +27,13 @@ html, body {
 
 #paintBall {
     position: absolute;
-    left: 300px;
     top: -50px;
     width: 40px;
     height: 40px;
     color: red;
     border-radius: 50%;
     background-color: red;
+}
+.dripAni {
+    animation: fallingPaint var(--animationSpeed);
 }

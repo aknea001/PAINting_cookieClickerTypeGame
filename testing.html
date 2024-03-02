@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        :root {
+            --animationSpeed: 4s
+        }
+
         @keyframes fallingPaint {
             0% {top: -50px;}
             100% {top: 110%;}
@@ -45,8 +49,7 @@
         } */
 
         .dripAni {
-            /* animation: fallingPaint 4s; */
-            text-align: center;
+            animation: fallingPaint var(--animationSpeed);
         }
     </style>
 </head>
@@ -60,8 +63,6 @@
 
 
     <script>
-        const dripAniClass = document.querySelectorAll(".dripAni")
-
         const dripColor = "red"
         let readyForDrip = true
 
@@ -77,21 +78,19 @@
         let trailWidth = 35
 
 
-        function testPaint() {
+        function dripPaint() {
             let fadeOpacity
             let randomX
-            let trailUpdates = 200
+            let dripSpeed = 4
+            let trailUpdates = dripSpeed * 1000 / 20
 
             if (readyForDrip) {
                 const paintBall = document.getElementById("paintBall")
                 randomX = Math.floor(Math.random() * window.innerWidth)
 
+                document.documentElement.style.setProperty("--animationSpeed", `${dripSpeed}s`)
                 paintBall.style.left = `${randomX - 20}px`
                 paintBall.classList.add("dripAni")
-
-                dripAniClass.forEach(function(element) {
-                    
-                })
 
                 // console.log(randomX)
 
@@ -119,16 +118,16 @@
                     setTimeout(trail, 20)
                 }
                 else {
-                    paintBall.classList.remove("goodClassName")
+                    paintBall.classList.remove("dripAni")
 
                     fadeThatShit()
                     
                     function fadeThatShit() {
                         context.globalAlpha = fadeOpacity
 
-                        context.clearRect(0, 0, canvas.width, canvas.height)
+                        context.clearRect(0, 0, bkCanvas.width, bkCanvas.height)
                         context.fillStyle = "white"
-                        context.fillRect(0, 0, canvas.width, canvas.height)
+                        context.fillRect(0, 0, bkCanvas.width, bkCanvas.height)
                         context.beginPath()
                         context.moveTo(randomX, 0)
                         context.strokeStyle = dripColor
@@ -142,9 +141,9 @@
                             setTimeout(fadeThatShit, 50)
                         }
                         else {
-                            context.clearRect(0, 0, canvas.width, canvas.height)
+                            context.clearRect(0, 0, bkCanvas.width, bkCanvas.height)
                             context.fillStyle = "white"
-                            context.fillRect(0, 0, canvas.width, canvas.height)
+                            context.fillRect(0, 0, bkCanvas.width, bkCanvas.height)
 
                             readyForDrip = true
                         }
