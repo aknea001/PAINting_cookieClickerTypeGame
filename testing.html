@@ -59,8 +59,10 @@
 
 
     <script>
-        const canvas = document.getElementById("bkCanvas")
         const dripColor = "red"
+        let readyForDrip = true
+
+        const canvas = document.getElementById("bkCanvas")
 
         canvas.width = window.innerWidth
         canvas.height = window.innerHeight
@@ -73,27 +75,33 @@
 
 
         function testPaint() {
-            const paintBall = document.getElementById("paintBall")
-            let randomX = Math.floor(Math.random() * window.innerWidth)
-
-            paintBall.style.left = `${randomX - 20}px`
-            paintBall.classList.add("goodClassName")
-
-            // console.log(randomX)
-
-            context.beginPath()
-            context.moveTo(randomX, 0)
-            context.strokeStyle = dripColor
-            context.lineWidth = trailWidth
-            context.lineCap = "round"
-            context.lineJoin = "round"
-
+            let fadeOpacity
+            let randomX
             let x = 200
-            let fadeOpacity = 1
 
-            trail()
+            if (readyForDrip) {
+                const paintBall = document.getElementById("paintBall")
+                randomX = Math.floor(Math.random() * window.innerWidth)
+
+                paintBall.style.left = `${randomX - 20}px`
+                paintBall.classList.add("goodClassName")
+
+                // console.log(randomX)
+
+                context.beginPath()
+                context.strokeStyle = dripColor
+                context.lineWidth = trailWidth
+                context.lineCap = "round"
+                context.lineJoin = "round"
+
+                fadeOpacity = 1
+
+                trail()
+            }
 
             function trail() {
+                readyForDrip = false
+
                 let ballYcoords = paintBall.getBoundingClientRect().top
 
                 context.globalAlpha = fadeOpacity
@@ -133,7 +141,7 @@
                             context.fillStyle = "white"
                             context.fillRect(0, 0, canvas.width, canvas.height)
 
-                            console.log("sup")
+                            readyForDrip = true
                         }
                     }
 
