@@ -7,12 +7,12 @@ let context = canvas.getContext("2d")
 context.fillStyle = "white"
 context.fillRect(0, 0, canvas.width, canvas.height)
 
-let color = "black"
+let drawColor = "black"
 let draw_width = "100"
 let is_drawing = "false"
 
 function intMG() {
-    document.getElementById("bkMiniGame").style = `
+    document.getElementById("darkBk").style = `
     z-index: 1;
     opacity: 1;`
 
@@ -31,7 +31,7 @@ function start(event) {
 function draw(event) {
     if (is_drawing) {
         context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop)
-        context.strokeStyle = color
+        context.strokeStyle = drawColor
         context.lineWidth = draw_width
         context.lineCap = "round"
         context.lineJoin = "round"
@@ -69,9 +69,9 @@ function checkFiled() {
     setTimeout(restartMG, 4000)
 
     function restartMG() {
-        document.getElementById("bkMiniGame").style = `
+        document.getElementById("darkBk").style = `
         z-index: -1;
-        opacity: 0%;`
+        opacity: 0;`
         context.clearRect(0, 0, canvas.width, canvas.height)
         context.fillRect(0, 0, canvas.width, canvas.height)
         document.getElementById("MGDisplayPrc").innerText = ""

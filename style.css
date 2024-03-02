@@ -13,7 +13,7 @@ html, body {
     overflow: hidden;
 }
 
-#bkMiniGame {
+#darkBk {
     position: absolute;
     display: flex;
     align-items: center;
@@ -34,6 +34,15 @@ html, body {
     border-radius: 50%;
     background-color: red;
 }
+
 .dripAni {
     animation: fallingPaint var(--animationSpeed);
+}
+
+#introColor {
+    display: none;
+}
+
+#miniGame {
+    display: none;
 }
