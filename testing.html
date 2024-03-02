@@ -44,8 +44,9 @@
             height: 100%;
         } */
 
-        .goodClassName {
-            animation: fallingPaint 4s;
+        .dripAni {
+            /* animation: fallingPaint 4s; */
+            text-align: center;
         }
     </style>
 </head>
@@ -59,17 +60,19 @@
 
 
     <script>
+        const dripAniClass = document.querySelectorAll(".dripAni")
+
         const dripColor = "red"
         let readyForDrip = true
 
-        const canvas = document.getElementById("bkCanvas")
+        const bkCanvas = document.getElementById("bkCanvas")
 
-        canvas.width = window.innerWidth
-        canvas.height = window.innerHeight
+        bkCanvas.width = window.innerWidth
+        bkCanvas.height = window.innerHeight
 
-        let context = canvas.getContext("2d")
+        let context = bkCanvas.getContext("2d")
         context.fillStyle = "white"
-        context.fillRect(0, 0, canvas.width, canvas.height)
+        context.fillRect(0, 0, bkCanvas.width, bkCanvas.height)
 
         let trailWidth = 35
 
@@ -77,14 +80,18 @@
         function testPaint() {
             let fadeOpacity
             let randomX
-            let x = 200
+            let trailUpdates = 200
 
             if (readyForDrip) {
                 const paintBall = document.getElementById("paintBall")
                 randomX = Math.floor(Math.random() * window.innerWidth)
 
                 paintBall.style.left = `${randomX - 20}px`
-                paintBall.classList.add("goodClassName")
+                paintBall.classList.add("dripAni")
+
+                dripAniClass.forEach(function(element) {
+                    
+                })
 
                 // console.log(randomX)
 
@@ -92,7 +99,6 @@
                 context.strokeStyle = dripColor
                 context.lineWidth = trailWidth
                 context.lineCap = "round"
-                context.lineJoin = "round"
 
                 fadeOpacity = 1
 
@@ -105,11 +111,11 @@
                 let ballYcoords = paintBall.getBoundingClientRect().top
 
                 context.globalAlpha = fadeOpacity
-                context.lineTo(randomX, ballYcoords)
+                context.lineTo(randomX, ballYcoords + 20)
                 context.stroke()
-                x -= 1
+                trailUpdates -= 1
 
-                if (x >= 1) {
+                if (trailUpdates >= 1) {
                     setTimeout(trail, 20)
                 }
                 else {
@@ -128,7 +134,6 @@
                         context.strokeStyle = dripColor
                         context.lineWidth = trailWidth
                         context.lineCap = "round"
-                        context.lineJoin = "round"
                         context.lineTo(randomX, window.innerHeight)
                         fadeOpacity -= 0.1
                         context.stroke()
