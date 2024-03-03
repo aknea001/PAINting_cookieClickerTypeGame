@@ -7,7 +7,7 @@ let context = canvas.getContext("2d")
 context.fillStyle = "white"
 context.fillRect(0, 0, canvas.width, canvas.height)
 
-let drawColor = "black"
+let drawColor = localStorage.getItem("color")
 let draw_width = "100"
 let is_drawing = "false"
 
@@ -15,6 +15,9 @@ function intMG() {
     document.getElementById("darkBk").style = `
     z-index: 1;
     opacity: 1;`
+    document.getElementById("miniGame").style.display = "block"
+
+    drawColor = localStorage.getItem("color")
 
     canvas.addEventListener("mousedown", start, false)
     canvas.addEventListener("mousemove", draw, false)
@@ -72,6 +75,7 @@ function checkFiled() {
         document.getElementById("darkBk").style = `
         z-index: -1;
         opacity: 0;`
+        document.getElementById("miniGame").style.display = "none"
         context.clearRect(0, 0, canvas.width, canvas.height)
         context.fillRect(0, 0, canvas.width, canvas.height)
         document.getElementById("MGDisplayPrc").innerText = ""
@@ -82,7 +86,6 @@ function checkFiled() {
 // -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_PAINT DRIP IN BACKGROUND-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-__-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 
 
-const dripColor = "red"
 let readyForDrip = true
 
 const bkCanvas = document.getElementById("bkCanvas")
@@ -98,6 +101,8 @@ let trailWidth = 35
 
 
 function dripPaint() {
+    drawColor = localStorage.getItem("color")
+
     let fadeOpacity
     let randomX
     let dripSpeed = 4
@@ -109,12 +114,13 @@ function dripPaint() {
 
         document.documentElement.style.setProperty("--animationSpeed", `${dripSpeed}s`)
         paintBall.style.left = `${randomX - 20}px`
+        paintBall.style.backgroundColor = drawColor
         paintBall.classList.add("dripAni")
 
         // console.log(randomX)
 
         bkctx.beginPath()
-        bkctx.strokeStyle = dripColor
+        bkctx.strokeStyle = drawColor
         bkctx.lineWidth = trailWidth
         bkctx.lineCap = "round"
 
@@ -149,7 +155,7 @@ function dripPaint() {
                 bkctx.fillRect(0, 0, bkCanvas.width, bkCanvas.height)
                 bkctx.beginPath()
                 bkctx.moveTo(randomX, 0)
-                bkctx.strokeStyle = dripColor
+                bkctx.strokeStyle = drawColor
                 bkctx.lineWidth = trailWidth
                 bkctx.lineCap = "round"
                 bkctx.lineTo(randomX, window.innerHeight)
@@ -167,7 +173,6 @@ function dripPaint() {
                     readyForDrip = true
                 }
             }
-
         }
     }
 }

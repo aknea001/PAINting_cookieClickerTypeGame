@@ -69,6 +69,9 @@ function confirmColor() {
     else {
         color = colorPicker.color.hexString
         darkBk()
+        document.getElementById("introColor").style.display = "none"
         console.log(color)
+
+        localStorage.setItem("color", color)
     }
 }
