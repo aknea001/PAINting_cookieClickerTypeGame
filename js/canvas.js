@@ -69,7 +69,7 @@ function checkFiled() {
     console.log(`Filled Percentage: ${filledPercentage}%`)
 
     document.getElementById("MGDisplayPrc").innerText = `Prosent fyllet: ${filledPercentage}%`
-    setTimeout(restartMG, 4000)
+    setTimeout(restartMG, 500)
 
     function restartMG() {
         document.getElementById("darkBk").style = `

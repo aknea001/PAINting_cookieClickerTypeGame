@@ -8,39 +8,49 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="darkBk">
-        <div id="introColor">
-            <div id="colorPicker"></div>
-            <button onclick="confirmColor()">confirm</button>
-            <p id="errorColor"></p>
+    <main>
+        <div id="darkBk">
+            <div id="introColor">
+                <div id="colorPicker"></div>
+                <button onclick="confirmColor()">confirm</button>
+                <p id="errorColor"></p>
+            </div>
+    
+            <div id="miniGame">
+                <canvas id="canvas"></canvas>
+                <button onclick="checkFiled()">Check percentage</button>
+                <p style="color: white;" id="MGDisplayPrc"></p>
+            </div>
         </div>
+    
+        <h1 style="margin: 0;">PAINting</h1>
+    
+        <p>Penger: <span id="money">40</span>kr</p>
+    
+        <div style="display: flex;">
+            <p>Pris: <span id="price">20</span>kr</p>
+            <button style="margin-left: 10px;" onclick="plusPrice()">Hev Prisen</button>
+            <button onclick="minusPrice()">Senk Prisen</button>
+        </div>
+    </main>
 
-        <div id="miniGame">
-            <canvas id="canvas"></canvas>
-            <button onclick="checkFiled()">Check percentage</button>
-            <p style="color: white;" id="MGDisplayPrc"></p>
+    <div id="mid">
+        <div id="bucketDiv">
+            <img src="paintbucket.png" alt="">
         </div>
     </div>
 
-    <h1 style="margin: 0;">PAINting</h1>
-
-    <p>Penger: <span id="money">40</span>kr</p>
-
-    <div style="display: flex;">
-        <p>Pris: <span id="price">20</span>kr</p>
-        <button style="margin-left: 10px;" onclick="plusPrice()">Hev Prisen</button>
-        <button onclick="minusPrice()">Senk Prisen</button>
+    <div id="right">
+        <div style="position: absolute; bottom: 0; right: 0;">
+            <a href="testing.html">testing html</a>
+            <button onclick="dripPaint()">test paint drip</button>
+            <button onclick="intMG()">Mini Game</button>
+            <button onclick="introPickColor()">Color Picker</button>
+        </div>
     </div>
-
-    <button onclick="intMG()">Mini Game</button>
-    <button onclick="introPickColor()">Color Picker</button>
-
-    <a href="testing.html">testing html</a>
-
 
     <canvas style="position: absolute; z-index: -2; left: 0; top: 0;" id="bkCanvas"></canvas>
-    <div id="paintBall">.</div>
-    <button style="position: absolute; bottom: 0; right: 0;" onclick="dripPaint()">test paint drip</button>
+    <div style="z-index: -2;" id="paintBall">.</div>
     <script src="js/script.js"></script>
     <script src="js/canvas.js"></script>
 </body>

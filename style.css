@@ -13,6 +13,34 @@ html, body {
     overflow: hidden;
 }
 
+body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+    "left mid right";
+}
+
+main {
+    grid-area: left;
+    border: 1px solid red;
+}
+
+#mid {
+    grid-area: mid;
+    border: 1px solid blue;
+}
+
+#right {
+    grid-area: right;
+    
+}
+
+#bucketDiv {
+    width: 350px;
+    margin: auto;
+    border: 1px solid black;
+}
+
 #darkBk {
     position: absolute;
     display: flex;
