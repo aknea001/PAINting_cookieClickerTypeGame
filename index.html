@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
-    <title>Document</title>
+    <title>PAINting</title>
 </head>
 <body>
     <main>
@@ -25,18 +25,21 @@
     
         <h1 style="margin: 0;">PAINting</h1>
     
-        <p>Penger: <span id="money">40</span>kr</p>
+        <p style="font-size: 1.5rem;">Penger: <span id="money">40</span>kr</p>
     
         <div style="display: flex;">
-            <p>Pris: <span id="price">20</span>kr</p>
+            <p style="font-size: 1.5rem;">Pris: <span id="price">20</span>kr</p>
             <button style="margin-left: 10px;" onclick="plusPrice()">Hev Prisen</button>
             <button onclick="minusPrice()">Senk Prisen</button>
         </div>
+        <p>Sjanse for å selge maling: <span id="chanceToSell">0</span>%</p>
     </main>
 
     <div id="mid">
+        <p class="textOverskrift" >Antall maling: <span id="malingTotal">0</span></p>
+        <p style="text-align: center;">Maling i sekundet(MiS): <span id="mis">0</span></p>
         <div id="bucketDiv">
-            <img src="paintbucket.png" alt="">
+            <img onclick="clickPaint()" style="margin-left: 30px; cursor: pointer;" src="paintbucket.png" alt="">
         </div>
     </div>
 

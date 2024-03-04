@@ -36,9 +36,18 @@ main {
 }
 
 #bucketDiv {
+    display: flex;
     width: 350px;
     margin: auto;
+    text-align: center;
+    margin-top: 30px;
     border: 1px solid black;
+}
+
+.textOverskrift {
+    font-size: 2.5rem;
+    margin: 0;
+    text-align: center;
 }
 
 #darkBk {

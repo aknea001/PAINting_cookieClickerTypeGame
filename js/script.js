@@ -1,18 +1,27 @@
 let money = 40
+let maling = 0
 let price = 20
-let maxPrice = 100
-let mps = 0
+let maxPrice = 50
+let mis = 0
 let color
 
 function update() {
+    document.getElementById("malingTotal").innerText = maling
     document.getElementById("money").innerText = money
     document.getElementById("price").innerText = price
+    document.getElementById("mis").innerText = mis
+    document.getElementById("chanceToSell").innerText = (50 - price) * 2
 }
 
 update()
 
+function clickPaint() {
+    maling += 1
+    update()
+}
+
 function plusPrice() {
-    if (price < 100) {
+    if (price < maxPrice) {
         price += 1
         update()
     }
@@ -25,6 +34,19 @@ function minusPrice() {
     }
 }
 
+function sellPaint() {
+    let chance = Math.floor(Math.random() * 50)
+
+    if (chance >= price - 1 && maling > 0) {
+        money += price
+        maling -= 1
+        update()
+    }
+    setTimeout(sellPaint, 1000)
+}
+
+sellPaint()
+
 // function test() {
 //     money += mps
 //     update()
@@ -34,11 +56,6 @@ function minusPrice() {
 // test()
 
 const colorPicker = new iro.ColorPicker("#colorPicker")
-
-function test() {
-    console.log(colorPicker.color.hexString)
-    setTimeout(test, 200)
-}
 
 let isDark = false
 

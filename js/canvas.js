@@ -66,7 +66,7 @@ function checkFiled() {
     const totalPixels = canvas.width * canvas.height
     const filledPercentage = (filledPixels / totalPixels) * 100
 
-    console.log(`Filled Percentage: ${filledPercentage}%`)
+    // console.log(`Filled Percentage: ${filledPercentage}%`)
 
     document.getElementById("MGDisplayPrc").innerText = `Prosent fyllet: ${filledPercentage}%`
     setTimeout(restartMG, 500)
@@ -139,7 +139,7 @@ function dripPaint() {
         bkctx.stroke()
         trailUpdates -= 1
 
-        if (trailUpdates >= 1) {
+        if (trailUpdates > 0) {
             setTimeout(trail, 20)
         }
         else {
