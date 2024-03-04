@@ -1,5 +1,6 @@
 let money = 40
 let maling = 0
+let storage = 150
 let price = 20
 let maxPrice = 50
 let mis = 0
@@ -16,7 +17,15 @@ function update() {
 update()
 
 function clickPaint() {
-    maling += 1
+    if (maling < storage) {
+        maling += 1
+    }
+    else {
+        document.getElementById("errorStorage").innerText = "Du har nådd din lager kapasitet \n Kjøp mer lagerplass!"
+        setTimeout(() => {
+            document.getElementById("errorStorage").innerText = ""
+        }, 3500);
+    }
     update()
 }
 

@@ -15,24 +15,43 @@ html, body {
 
 body {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+    grid-template-rows: 1fr 2fr;
     grid-template-areas: 
-    "left mid right";
+    "left left mid right right"
+    "lft1 lft2 mid rigt1 rigt2";
 }
 
 main {
     grid-area: left;
-    border: 1px solid red;
 }
 
 #mid {
     grid-area: mid;
-    border: 1px solid blue;
 }
 
 #right {
     grid-area: right;
-    
+}
+
+#basicUpg {
+    grid-area: lft1;
+    border: 1px solid red;
+}
+
+#paintUpg {
+    grid-area: lft2;
+    border: 1px solid red;
+}
+
+#idk {
+    grid-area: rigt1;
+    border: 1px solid black;
+}
+
+#storageUpg {
+    grid-area: rigt2;
+    border: 1px solid black;
 }
 
 #bucketDiv {
@@ -41,7 +60,6 @@ main {
     margin: auto;
     text-align: center;
     margin-top: 30px;
-    border: 1px solid black;
 }
 
 .textOverskrift {

@@ -35,8 +35,17 @@
         <p>Sjanse for å selge maling: <span id="chanceToSell">0</span>%</p>
     </main>
 
+    <div id="basicUpg">
+        .
+    </div>
+
+    <div id="paintUpg">
+        .
+    </div>
+
     <div id="mid">
-        <p class="textOverskrift" >Antall maling: <span id="malingTotal">0</span></p>
+        <p class="textOverskrift">Antall maling: <span id="malingTotal">0</span></p>
+        <p style="text-align: center;" id="errorStorage"></p>
         <p style="text-align: center;">Maling i sekundet(MiS): <span id="mis">0</span></p>
         <div id="bucketDiv">
             <img onclick="clickPaint()" style="margin-left: 30px; cursor: pointer;" src="paintbucket.png" alt="">
@@ -50,6 +59,14 @@
             <button onclick="intMG()">Mini Game</button>
             <button onclick="introPickColor()">Color Picker</button>
         </div>
+    </div>
+
+    <div id="idk">
+        .
+    </div>
+
+    <div id="storageUpg">
+        .
     </div>
 
     <canvas style="position: absolute; z-index: -2; left: 0; top: 0;" id="bkCanvas"></canvas>
