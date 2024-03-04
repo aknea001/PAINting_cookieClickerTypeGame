@@ -69,20 +69,26 @@ main {
     margin-top: 30px;
 }
 
-#basicHammer {
+.upgradeDiv {
     width: fit-content;
+    margin-top: 1rem;
 }
 
-#basicHammerTT {
+.upgradeDiv:hover .toolTip {
+    display: block;
+}
+
+.toolTip {
     position: absolute;
     border-radius: 10px;
     border: 4px solid black;
+    background-color: white;
     text-align: center;
     display: none;
 }
 
-#basicHammer:hover #basicHammerTT {
-    display: block;
+#basicMpp, #firstMalingKost {
+    display: none;
 }
 
 .textOverskrift {

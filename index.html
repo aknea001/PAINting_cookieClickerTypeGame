@@ -26,22 +26,30 @@
     <main>
         <h1 style="margin: 0; font-size: 3rem;">PAINting</h1>
     
-        <p style="font-size: 1.5rem; margin-top: 10px;">Penger: <span id="money">40</span>kr</p>
-    
         <div style="display: flex;">
             <p style="font-size: 1.5rem; margin-top: 10px;">Pris: <span id="price">20</span>kr</p>
             <button style="margin-left: 10px;" onclick="plusPrice()">Hev Prisen</button>
             <button onclick="minusPrice()">Senk Prisen</button>
         </div>
         <p>Sjanse for å selge maling: <span id="chanceToSell">0</span>%</p>
-        <p>Lagrings plass: <span id="storageTotal">100</span></p>
+        <p>Lagrings plass: <span id="storageLeft">100</span> / <span id="storageTotal">100</span></p>
     </main>
+
+<!-- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_buyBasicUpg(this, kost, maling per click, bedre sjanse selge, maling per pigment)-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_- -->
 
     <div id="basicUpg">
         <p>BASIC UPGRADES</p>
-        <div id="basicHammer">
-            <button onclick="buyBasicUpg(this, 300, 1)">Kjøp Basic Hammer (300kr)</button>
-            <div id="basicHammerTT">+1 maling per click</div>
+        <div id="basicHammer" class="upgradeDiv">
+            <button onclick="buyBasicUpg(this, 300, 1, 0, 0)">Kjøp Basic Hammer (300kr)</button>
+            <div class="toolTip">+1 maling per click</div>
+        </div>
+        <div id="basicMpp" class="upgradeDiv">
+            <button onclick="buyBasicUpg(this, 500, 0, 0, 1)">Lei en Trollmann til å klone (500kr)</button>
+            <div class="toolTip">Han kan bare klone pigment, Du får 2 maling per pigment</div>
+        </div>
+        <div id="firstMalingKost" class="upgradeDiv">
+            <button>Kjøp en malingskost (1000kr)</button>
+            <div class="toolTip">Du kan kanskje bruke den til noe (??)</div>
         </div>
         
     </div>
@@ -51,6 +59,7 @@
     </div>
 
     <div id="mid">
+        <p class="textOverskrift">Penger: <span id="money">40</span>kr</p>
         <p class="textOverskrift">Antall maling: <span id="malingTotal">0</span></p>
         <p style="text-align: center;" id="errorClickPaint"></p>
         <p style="text-align: center; margin-top: 10px;">Maling i sekundet(MiS): <span id="mis">0</span></p>
@@ -82,7 +91,7 @@
 
     <canvas style="position: absolute; z-index: -2; left: 0; top: 0;" id="bkCanvas"></canvas>
     <div style="z-index: -2;" id="paintBall">.</div>
-    <script src="js/script.js"></script>
     <script src="js/canvas.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
