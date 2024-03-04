@@ -1,8 +1,12 @@
 let money = 40
 let maling = 0
-let storage = 150
+let malingPerClick = 1
+let storage = 100
 let price = 20
 let maxPrice = 50
+let pigment = 0
+let malingPerPigment = 1
+let pigmentPrice = 5
 let mis = 0
 let color
 
@@ -12,19 +16,30 @@ function update() {
     document.getElementById("price").innerText = price
     document.getElementById("mis").innerText = mis
     document.getElementById("chanceToSell").innerText = (50 - price) * 2
+    document.getElementById("pigmentTotal").innerText = pigment
+    document.getElementById("storageTotal").innerText = storage
 }
 
 update()
 
 function clickPaint() {
-    if (maling < storage) {
-        maling += 1
+    if (maling + malingPerClick <= storage && pigment >= malingPerClick / malingPerPigment) {
+        maling += malingPerClick
+        pigment -= malingPerClick / malingPerPigment
+    }
+    else if (maling + malingPerClick >= storage){
+        window.alert("Du har ikke nok lagring!")
+        // document.getElementById("errorClickPaint").innerText = "Du har nådd din lager kapasitet \n Kjøp mer lagerplass!"
+        // setTimeout(() => {
+        //     document.getElementById("errorClickPaint").innerText = ""
+        // }, 3500);
     }
     else {
-        document.getElementById("errorStorage").innerText = "Du har nådd din lager kapasitet \n Kjøp mer lagerplass!"
-        setTimeout(() => {
-            document.getElementById("errorStorage").innerText = ""
-        }, 3500);
+        alert("Du mangler pigment!")
+        // document.getElementById("errorClickPaint").innerText = "Du mangler pigment \n Kjøp pigment!"
+        // setTimeout(() => {
+        //     document.getElementById("errorClickPaint").innerText = ""
+        // }, 3500);
     }
     update()
 }
@@ -56,6 +71,23 @@ function sellPaint() {
 
 sellPaint()
 
+function buyPigment() {
+    if (money >= pigmentPrice) {
+        money -= pigmentPrice
+        pigment += 1
+        update()
+    }
+}
+
+function buyBasicUpg(element, price, mpc) {
+    if (money >= price) {
+        element.style.display = "none"
+        malingPerClick += mpc
+        console.log(malingPerClick)
+    }
+    update()
+}
+
 // function test() {
 //     money += mps
 //     update()
@@ -85,7 +117,7 @@ function darkBk() {
 
 function introPickColor() {
     darkBk()
-    document.getElementById("introColor").style.display = "block"
+    document.getElementById("introColor").style.display = "flex"
 }
 
 function confirmColor() {
