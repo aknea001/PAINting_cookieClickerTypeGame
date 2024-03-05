@@ -1,4 +1,4 @@
-let money = 400              //40
+let money = 1000              //40
 let maling = 0              //0
 let mis = 0                 //0
 let malingPerClick = 1      //1
@@ -15,6 +15,7 @@ let chanceMax = 50          //50
 let color
 
 let totalPaint = 0
+let harKost = false         //false
 
 function update() {
     document.getElementById("malingTotal").innerText = maling.toFixed(1)
@@ -116,6 +117,17 @@ function buyBasicUpg(element, price, mpc, betterChance, mpp) {
         console.log(malingPerClick)
     }
     update()
+}
+
+function buyFirstKost() {
+    if (money >= 1000) {
+        harKost = false
+
+        document.getElementById("firstMalingKost").style.display = "none"
+        document.getElementById("paintUpg").style.display = "block"
+
+        intMG()
+    }
 }
 
 // function test() {

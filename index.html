@@ -16,6 +16,14 @@
             <p id="errorColor"></p>
         </div>
 
+        <div id="confirmJob">
+            <p>Du har fått en ny jobb!</p>
+            <p>Mal huset til <span id="navnOfClient">navn</span></p>
+            <img id="picOfPerson" src="people/man3.png" alt="">
+            <p>Du kan tjene <span id="maxPenger">penger</span> kr</p>
+            <button onclick="confirmJob()">Accept</button>
+            <button onclick="closeJobOffer()">Deny</button>
+        </div>
         <div id="miniGame">
             <canvas id="canvas"></canvas>
             <button onclick="checkFiled()">Check percentage</button>
@@ -48,14 +56,18 @@
             <div class="toolTip">Han kan bare klone pigment, Du får 2 maling per pigment</div>
         </div>
         <div id="firstMalingKost" class="upgradeDiv">
-            <button>Kjøp en malingskost (1000kr)</button>
+            <button onclick="buyFirstKost()">Kjøp en malingskost (1000kr)</button>
             <div class="toolTip">Du kan kanskje bruke den til noe (??)</div>
         </div>
         
     </div>
 
     <div id="paintUpg">
-        .
+        <p>MALING BUSINESS UPGRADE</p>
+        <div id="basicMalingMark" class="upgradeDiv">
+            <button>Kjøp reklame (1250kr)</button>
+            <div class="toolTip">Gir deg større sjanse for malings tilbud</div>
+        </div>
     </div>
 
     <div id="mid">

@@ -15,9 +15,73 @@ function intMG() {
     document.getElementById("darkBk").style = `
     z-index: 1;
     opacity: 1;`
-    document.getElementById("miniGame").style.display = "block"
+
+    document.getElementById("confirmJob").style.display = "block"
+
+    let choosePic = "man3"
+    const navn = document.getElementById("navnOfClient")
+    const maxPengerElement = document.getElementById("maxPenger")
+    let maxPenger
+    let randomPerson = Math.floor(Math.random() * 6)
+
+    function setMaxMoney(max, min) {
+        maxPenger = Math.floor(Math.random() * (max - min + 1) + min)
+        maxPengerElement.innerText = maxPenger
+    }
+
+    if (randomPerson == 0) {
+        choosePic = "man1"
+        navn.innerText = "Muhamed"
+
+        setMaxMoney(150, 120)
+    }
+    else if (randomPerson == 1) {
+        choosePic = "man2"
+        navn.innerText = "George"
+
+        setMaxMoney(120, 99)
+    }
+    else if (randomPerson == 2) {
+        choosePic = "man3"
+        navn.innerText = "Pål"
+
+        setMaxMoney(53, 20)
+    }
+    else if (randomPerson == 3) {
+        choosePic = "woman1"
+        navn.innerText = "Sofie"
+
+        setMaxMoney(123, 101)
+    }
+    else if (randomPerson == 4) {
+        choosePic = "woman2"
+        navn.innerText = "Pauline"
+
+        setMaxMoney(140, 111)
+    }
+    else if (randomPerson == 5) {
+        choosePic = "woman3"
+        navn.innerText = "Daniel"
+
+        setMaxMoney(183, 153)
+    }
+
+    document.getElementById("picOfPerson").setAttribute("src", `people/${choosePic}.png`)
+}
+
+function closeJobOffer() {
+    document.getElementById("darkBk").style = `
+    z-index: -1;
+    opacity: 0;`
+
+    document.getElementById("confirmJob").style.display = "none"
+}
+
+function confirmJob() {
+    document.getElementById("confirmJob").style.display = "none"
 
     drawColor = localStorage.getItem("color")
+    document.getElementById("miniGame").style.display = "block"
 
     canvas.addEventListener("mousedown", start, false)
     canvas.addEventListener("mousemove", draw, false)
