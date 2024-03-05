@@ -4,37 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        #basicHammer {
-    width: fit-content;
-}
-
-    .toolTip {
-        position: absolute;
-        border-radius: 10px;
-        border: 4px solid black;
-        background-color: white;
-        text-align: center;
-        display: none;
-    }
-
-    #basicHammer:hover .toolTip {
-        display: block;
-    }
-
-    #basicMarketing:hover .toolTip {
-        display: block;
-    }
-    </style>
 </head>
 <body>
-    <div id="basicHammer">
-        <button>Kjøp Basic Hammer (300kr)</button>
-        <div class="toolTip">+1 maling per click</div>
-    </div>
-    <div id="basicMarketing">
-        <button>Kjøp basic marketing(500kr)</button>
-        <div class="toolTip">Bedre sjanse for salg</div>
-    </div>
+    
+    <script>
+        function setMaxMoney(max, min) {
+            let upgMult = 2
+            let maxPenger = Math.floor(Math.random() * ((max * upgMult) - (min * upgMult) + 1) + min * upgMult)
+
+            if (maxPenger == 246) {
+                console.log("yup 146 max smile")
+            }
+        }
+
+        function yup() {
+            setMaxMoney(123, 101)
+
+            setTimeout(yup, 20)
+        }
+
+        // yup()
+    </script>
 </body>
 </html>

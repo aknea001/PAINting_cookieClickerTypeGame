@@ -29,6 +29,9 @@ function update() {
 
     updateUpgrade()
 
+    money += parseFloat(localStorage.getItem("moneyFromMaling"))
+    localStorage.setItem("moneyFromMaling", 0)
+
     if (mis <= 0 && maling <= 0 && pigment <= 0 && money < pigmentPrice) {
         alert(`Ser ut som om du har soft locket degselv \n Her er ${pigmentPrice - money}kr for å få deg tilbake`)
         money += pigmentPrice - money
@@ -36,6 +39,8 @@ function update() {
     }
 
     // console.log(totalPaint)
+
+    setTimeout(update, 100)
 }
 
 function updateUpgrade() {
@@ -119,11 +124,11 @@ function buyBasicUpg(element, price, mpc, betterChance, mpp) {
     update()
 }
 
-function buyFirstKost() {
+function buyFirstKost(element) {
     if (money >= 1000) {
         harKost = false
 
-        document.getElementById("firstMalingKost").style.display = "none"
+        element.style.display = "none"
         document.getElementById("paintUpg").style.display = "block"
 
         intMG()

@@ -123,6 +123,23 @@ main {
     margin: auto;
 }
 
+#miniGame {
+    display: none;
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+    flex-direction: column;
+}
+
+#finishMG {
+    display: none;
+    width: 300px;
+    height: 200px;
+    background-color: white;
+    text-align: center;
+    font-size: 2rem;
+}
+
 #paintBall {
     position: absolute;
     top: -50px;
@@ -143,8 +160,4 @@ main {
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
-}
-
-#miniGame {
-    display: none;
 }

@@ -25,9 +25,15 @@
             <button onclick="closeJobOffer()">Deny</button>
         </div>
         <div id="miniGame">
+            <p>Mal hele huset</p>
             <canvas id="canvas"></canvas>
-            <button onclick="checkFiled()">Check percentage</button>
-            <p style="color: white;" id="MGDisplayPrc"></p>
+            <button style="margin-top: 10px;" onclick="checkFiled()">Done</button>
+        </div>
+        <div id="finishMG">
+            <p>Du malte <span id="MGDisplayPrc">error</span>%</p>
+            <p><span id="x">error</span> * <span id="y">error</span>% = <span id="xy">error</span></p>
+            <p>Du tjente <span id="amountEarned">error</span>kr!</p>
+            <button onclick="restartMG()">Tilbake</button>
         </div>
     </div>
 
@@ -56,7 +62,7 @@
             <div class="toolTip">Han kan bare klone pigment, Du får 2 maling per pigment</div>
         </div>
         <div id="firstMalingKost" class="upgradeDiv">
-            <button onclick="buyFirstKost()">Kjøp en malingskost (1000kr)</button>
+            <button onclick="buyFirstKost(this)">Kjøp en malingskost (1000kr)</button>
             <div class="toolTip">Du kan kanskje bruke den til noe (??)</div>
         </div>
         

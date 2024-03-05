@@ -8,8 +8,11 @@ context.fillStyle = "white"
 context.fillRect(0, 0, canvas.width, canvas.height)
 
 let drawColor = localStorage.getItem("color")
-let draw_width = "100"
+let draw_width = "10"           //10
 let is_drawing = "false"
+
+let maxPenger
+let upgMult = 1                 //1
 
 function intMG() {
     document.getElementById("darkBk").style = `
@@ -21,11 +24,10 @@ function intMG() {
     let choosePic = "man3"
     const navn = document.getElementById("navnOfClient")
     const maxPengerElement = document.getElementById("maxPenger")
-    let maxPenger
     let randomPerson = Math.floor(Math.random() * 6)
 
     function setMaxMoney(max, min) {
-        maxPenger = Math.floor(Math.random() * (max - min + 1) + min)
+        maxPenger = Math.floor(Math.random() * ((max * upgMult) - (min * upgMult) + 1) + min * upgMult)
         maxPengerElement.innerText = maxPenger
     }
 
@@ -81,7 +83,7 @@ function confirmJob() {
     document.getElementById("confirmJob").style.display = "none"
 
     drawColor = localStorage.getItem("color")
-    document.getElementById("miniGame").style.display = "block"
+    document.getElementById("miniGame").style.display = "flex"
 
     canvas.addEventListener("mousedown", start, false)
     canvas.addEventListener("mousemove", draw, false)
@@ -117,6 +119,9 @@ function stopDrawing(event) {
 }
 
 function checkFiled() {
+    document.getElementById("miniGame").style.display = "none"
+    document.getElementById("finishMG").style.display = "block"
+
     const data = context.getImageData(0, 0, canvas.width, canvas.height).data
 
     let filledPixels = 0
@@ -128,22 +133,35 @@ function checkFiled() {
     }
 
     const totalPixels = canvas.width * canvas.height
-    const filledPercentage = (filledPixels / totalPixels) * 100
+    let filledPercentage = ((filledPixels / totalPixels) * 100).toFixed(2)
+
+    if (filledPercentage > 98.5) {
+        filledPercentage = 100
+    }
 
     // console.log(`Filled Percentage: ${filledPercentage}%`)
 
-    document.getElementById("MGDisplayPrc").innerText = `Prosent fyllet: ${filledPercentage}%`
-    setTimeout(restartMG, 500)
+    document.getElementById("MGDisplayPrc").innerText = filledPercentage
 
-    function restartMG() {
-        document.getElementById("darkBk").style = `
-        z-index: -1;
-        opacity: 0;`
-        document.getElementById("miniGame").style.display = "none"
-        context.clearRect(0, 0, canvas.width, canvas.height)
-        context.fillRect(0, 0, canvas.width, canvas.height)
-        document.getElementById("MGDisplayPrc").innerText = ""
-    }
+    let amountEarned = (maxPenger * (filledPercentage / 100)).toFixed(1)
+
+    document.getElementById("x").innerText = maxPenger
+    document.getElementById("y").innerText = filledPercentage
+    document.getElementById("xy").innerText = amountEarned
+    document.getElementById("amountEarned").innerText = amountEarned
+
+    localStorage.setItem("moneyFromMaling", amountEarned)
+    // setTimeout(restartMG, 500)
+}
+
+function restartMG() {
+    document.getElementById("darkBk").style = `
+    z-index: -1;
+    opacity: 0;`
+    document.getElementById("miniGame").style.display = "none"
+    document.getElementById("finishMG").style.display = "none"
+    context.clearRect(0, 0, canvas.width, canvas.height)
+    context.fillRect(0, 0, canvas.width, canvas.height)
 }
 
 
