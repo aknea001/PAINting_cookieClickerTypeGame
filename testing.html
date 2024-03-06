@@ -6,24 +6,37 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <button onclick="stopFunc()">stop</button>
+    <button onclick="dTrue()">start maybe hopefully not yk smile :3</button>
+    <button onclick="startAgain()">start again</button>
+
     <script>
-        function setMaxMoney(max, min) {
-            let upgMult = 2
-            let maxPenger = Math.floor(Math.random() * ((max * upgMult) - (min * upgMult) + 1) + min * upgMult)
+        let d = true
 
-            if (maxPenger == 246) {
-                console.log("yup 146 max smile")
+        test()
+        function test() {
+            if (d) {
+                console.log("this shit is running")
             }
+            else {
+                return
+            }
+            setTimeout(test, 20)
         }
 
-        function yup() {
-            setMaxMoney(123, 101)
-
-            setTimeout(yup, 20)
+        function stopFunc() {
+            d = false
         }
 
-        // yup()
+        function dTrue() {
+            d = true
+        }
+
+        function startAgain() {
+            d = true
+
+            test()
+        }
     </script>
 </body>
 </html>

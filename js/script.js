@@ -1,4 +1,4 @@
-let money = 1000              //40
+let money = 40              //40
 let maling = 0              //0
 let mis = 0                 //0
 let malingPerClick = 1      //1

@@ -14,6 +14,10 @@ let is_drawing = "false"
 let maxPenger
 let upgMult = 1                 //1
 
+let maxTimeBetweenJob
+let inMins = 3
+let timeBetweenJob
+
 function intMG() {
     document.getElementById("darkBk").style = `
     z-index: 1;
@@ -77,6 +81,11 @@ function closeJobOffer() {
     opacity: 0;`
 
     document.getElementById("confirmJob").style.display = "none"
+
+    maxTimeBetweenJob = (inMins * 60) * 1000
+    timeBetweenJob = Math.floor(Math.random() * maxTimeBetweenJob)
+    console.log((timeBetweenJob / 1000) / 60)
+    setTimeout(intMG, timeBetweenJob)
 }
 
 function confirmJob() {
@@ -118,7 +127,7 @@ function stopDrawing(event) {
     event.preventDefault()
 }
 
-function checkFiled() {
+function checkFilled() {
     document.getElementById("miniGame").style.display = "none"
     document.getElementById("finishMG").style.display = "block"
 
@@ -162,6 +171,11 @@ function restartMG() {
     document.getElementById("finishMG").style.display = "none"
     context.clearRect(0, 0, canvas.width, canvas.height)
     context.fillRect(0, 0, canvas.width, canvas.height)
+
+    maxTimeBetweenJob = (inMins * 60) * 1000
+    timeBetweenJob = Math.floor(Math.random() * maxTimeBetweenJob)
+    console.log((timeBetweenJob / 1000) / 60)
+    setTimeout(intMG, timeBetweenJob)
 }
 
 
