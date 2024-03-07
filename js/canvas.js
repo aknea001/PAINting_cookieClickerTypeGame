@@ -10,19 +10,43 @@ context.fillRect(0, 0, canvas.width, canvas.height)
 let drawColor = localStorage.getItem("color")
 let draw_width = 10           //10
 let is_drawing = "false"
+let malingMoney = parseFloat(localStorage.getItem("money"))
 
 let maxPenger
 let upgMult = 1                 //1
 
 let maxTimeBetweenJob
-let inMins = 3
+let inMins = 3                  //3
 let timeBetweenJob
+
+let harKost = localStorage.getItem("harKost")
 
 function malingUpg(element, money, time, width) {
     element.style.display = "none"
     upgMult += money
     inMins -= time
     draw_width += width
+}
+
+function buyFirstKost(element) {
+    if (money >= 1000) {
+
+        element.style.display = "none"
+        document.getElementById("paintUpg").style.display = "block"
+
+        localStorage.setItem("harKost", null)
+
+        intMG()
+    }
+}
+
+if (harKost) {
+    maxTimeBetweenJob = (inMins * 60) * 1000
+    timeBetweenJob = Math.floor(Math.random() * maxTimeBetweenJob)
+    console.log((timeBetweenJob / 1000) / 60)
+    setTimeout(intMG, timeBetweenJob)
+
+    localStorage.setItem("harKost", "a nice value :)")
 }
 
 function intMG() {
@@ -39,6 +63,7 @@ function intMG() {
 
     function setMaxMoney(max, min) {
         maxPenger = Math.floor(Math.random() * ((max * upgMult) - (min * upgMult) + 1) + min * upgMult)
+
         maxPengerElement.innerText = maxPenger
     }
 
@@ -155,18 +180,20 @@ function checkFilled() {
         filledPercentage = 100
     }
 
-    // console.log(`Filled Percentage: ${filledPercentage}%`)
-
     document.getElementById("MGDisplayPrc").innerText = filledPercentage
 
-    let amountEarned = (maxPenger * (filledPercentage / 100)).toFixed(1)
+    let amountEarned = parseFloat((maxPenger * (filledPercentage / 100)).toFixed(1))
+    malingMoney = parseFloat(localStorage.getItem("money"))
 
     document.getElementById("x").innerText = maxPenger
     document.getElementById("y").innerText = filledPercentage
     document.getElementById("xy").innerText = amountEarned
     document.getElementById("amountEarned").innerText = amountEarned
 
-    localStorage.setItem("moneyFromMaling", amountEarned)
+    malingMoney += amountEarned
+
+    localStorage.setItem("money", malingMoney)
+    // location.reload()
     // setTimeout(restartMG, 500)
 }
 
@@ -178,11 +205,6 @@ function restartMG() {
     document.getElementById("finishMG").style.display = "none"
     context.clearRect(0, 0, canvas.width, canvas.height)
     context.fillRect(0, 0, canvas.width, canvas.height)
-
-    maxTimeBetweenJob = (inMins * 60) * 1000
-    timeBetweenJob = Math.floor(Math.random() * maxTimeBetweenJob)
-    console.log((timeBetweenJob / 1000) / 60)
-    setTimeout(intMG, timeBetweenJob)
 }
 
 
