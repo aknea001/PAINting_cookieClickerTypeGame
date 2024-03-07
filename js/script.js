@@ -1,20 +1,53 @@
-let money = 40              //40
-let maling = 0              //0
-let mis = 0                 //0
-let malingPerClick = 1      //1
-let malingPerPigment = 1    //1
+const colorPicker = new iro.ColorPicker("#colorPicker")
+let pickColor = localStorage.getItem("pickColor")
 
-let pigment = 0             //0
-let pigmentPrice = 5        //5
+if (!pickColor) {
+    darkBk()
+    document.getElementById("introColor").style.display = "flex"
+}
 
-let storage = 200           //200
-let price = 20              //20
-let maxPrice = 50           //50
+function confirmColor() {
+    if (colorPicker.color.hexString == "#ffffff") {
+        document.getElementById("errorColor").innerText = "cmon be more creative, \n CHOOSE A DIFFERENT COLOR"
+    }
+    else {
+        color = colorPicker.color.hexString
+        darkBk()
+        document.getElementById("introColor").style.display = "none"
+        console.log(color)
 
-let chanceMax = 50          //50
+        localStorage.setItem("pickColor", "value")
+        localStorage.setItem("money", 40)                   //40
+        localStorage.setItem("maling", 0)                   //0
+        localStorage.setItem("mis", 0)                      //0
+        localStorage.setItem("mpc", 1)                      //1
+        localStorage.setItem("mpp", 1)                      //1
+        localStorage.setItem("pigment", 0)                  //0
+        localStorage.setItem("pigmentPrice", 5)             //5
+        localStorage.setItem("storage", 200)                //200
+        localStorage.setItem("price", 20)                   //20
+        localStorage.setItem("chanceMax", 50)               //50
+
+        localStorage.setItem("color", color)
+    }
+}
+
+
+let money = parseFloat(localStorage.getItem("money"))             //40
+let maling = parseFloat(localStorage.getItem("maling"))              //0
+let mis = parseFloat(localStorage.getItem("mis"))                 //0
+let malingPerClick = parseFloat(localStorage.getItem("mpc"))      //1
+let malingPerPigment = parseFloat(localStorage.getItem("mpp"))    //1
+
+let pigment = parseFloat(localStorage.getItem("pigment"))             //0
+let pigmentPrice = parseFloat(localStorage.getItem("pigmentPrice"))        //5
+
+let storage = parseFloat(localStorage.getItem("storage"))           //200
+let price = parseFloat(localStorage.getItem("price"))              //20
+let maxPrice = 50                                                   //50
+
+let chanceMax = parseFloat(localStorage.getItem("chanceMax"))          //50
 let color
-
-let totalPaint = 0
 let harKost = false         //false
 
 function update() {
@@ -38,7 +71,30 @@ function update() {
         update()
     }
 
-    // console.log(totalPaint)
+    localStorage.setItem("money", money)
+    localStorage.setItem("maling", maling)
+    localStorage.setItem("mis", mis)
+    localStorage.setItem("mpc", malingPerClick)
+    localStorage.setItem("mpp", malingPerPigment)
+    localStorage.setItem("pigment", pigment)
+    localStorage.setItem("pigmentPrice", pigmentPrice)
+    localStorage.setItem("storage", storage)
+    localStorage.setItem("price", price)
+    localStorage.setItem("chanceMax", chanceMax)
+
+    money = parseFloat(localStorage.getItem("money"))
+    maling = parseFloat(localStorage.getItem("maling"))
+    mis = parseFloat(localStorage.getItem("mis"))
+    malingPerClick = parseFloat(localStorage.getItem("mpc"))
+    malingPerPigment = parseFloat(localStorage.getItem("mpp"))
+
+    pigment = parseFloat(localStorage.getItem("pigment"))
+    pigmentPrice = parseFloat(localStorage.getItem("pigmentPrice"))
+
+    storage = parseFloat(localStorage.getItem("storage"))
+    price = parseFloat(localStorage.getItem("price"))
+
+    chanceMax = parseFloat(localStorage.getItem("chanceMax"))
 
     setTimeout(update, 100)
 }
@@ -57,7 +113,6 @@ update()
 function clickPaint() {
     if (maling + malingPerClick <= storage && pigment >= malingPerClick / malingPerPigment) {
         maling += malingPerClick
-        totalPaint += malingPerClick
         pigment -= malingPerClick / malingPerPigment
     }
     else if (maling + malingPerClick >= storage){
@@ -143,8 +198,6 @@ function buyFirstKost(element) {
 
 // test()
 
-const colorPicker = new iro.ColorPicker("#colorPicker")
-
 let isDark = false
 
 function darkBk() {
@@ -162,36 +215,12 @@ function darkBk() {
     }
 }
 
-function introPickColor() {
-    darkBk()
-    document.getElementById("introColor").style.display = "flex"
-}
-
-function confirmColor() {
-    if (colorPicker.color.hexString == "#ffffff") {
-        document.getElementById("errorColor").innerText = "cmon be more creative, \n CHOOSE A DIFFERENT COLOR"
-    }
-    else {
-        color = colorPicker.color.hexString
-        darkBk()
-        document.getElementById("introColor").style.display = "none"
-        console.log(color)
-
-        localStorage.setItem("color", color)
-    }
-}
-
-let qDrip = 0
-function intDripPaint() {
-
-    if (totalPaint >= 10) {
-        qDrip = totalPaint / 10
-    }
-
-    if (qDrip >= 1) {
+function queuePaintDrip() {
+    if (maling >= 10) {
         dripPaint()
-        qDrip -= 1
+        console.log("test")
     }
+    setTimeout(queuePaintDrip, 1000)
 }
 
-intDripPaint()
+queuePaintDrip()
