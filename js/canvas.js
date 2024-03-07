@@ -8,7 +8,7 @@ context.fillStyle = "white"
 context.fillRect(0, 0, canvas.width, canvas.height)
 
 let drawColor = localStorage.getItem("color")
-let draw_width = "10"           //10
+let draw_width = 10           //10
 let is_drawing = "false"
 
 let maxPenger
@@ -17,6 +17,13 @@ let upgMult = 1                 //1
 let maxTimeBetweenJob
 let inMins = 3
 let timeBetweenJob
+
+function malingUpg(element, money, time, width) {
+    element.style.display = "none"
+    upgMult += money
+    inMins -= time
+    draw_width += width
+}
 
 function intMG() {
     document.getElementById("darkBk").style = `
