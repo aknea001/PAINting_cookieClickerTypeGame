@@ -50,7 +50,6 @@ let maxPrice = 50           //50
 let chanceMax = 50          //50
 let color
 
-let totalPaint = 0
 let harKost = false         //false
 
 function update() {
@@ -74,8 +73,6 @@ function update() {
         update()
     }
 
-    // console.log(totalPaint)
-
     setTimeout(update, 100)
 }
 
@@ -93,7 +90,6 @@ update()
 function clickPaint() {
     if (maling + malingPerClick <= storage && pigment >= malingPerClick / malingPerPigment) {
         maling += malingPerClick
-        totalPaint += malingPerClick
         pigment -= malingPerClick / malingPerPigment
     }
     else if (maling + malingPerClick >= storage){
@@ -186,16 +182,52 @@ function buyFirstKost(element) {
     update()
 }
 
+let workerRunning = false
+
 function changeWOrker() {
+    workerRunning = false
     darkBk()
     document.getElementById("changeWorker").style.display = "block"
 }
 
 function misWorker() {
     if (workerRunning) {
-        maling += 1
-        mis += 1
-        
+        if (maling < storage && pigment > 0) {
+            maling += 1
+            pigment -= malingPerClick / malingPerPigment
+
+            update()
+        }
+
+        setTimeout(misWorker, 1000)
+    }
+    else {
+        return
+    }
+}
+
+function pigWorker() {
+    if (workerRunning) {
+        buyPigment()
+        update()
+
+        setTimeout(pigWorker, 1000)
+    }
+    else {
+        return
+    }
+}
+
+function intWorker(num) {
+    workerRunning = true
+    darkBk()
+    document.getElementById("changeWorker").style.display = "none"
+
+    if (num == 0) {
+        misWorker()
+    }
+    else {
+        pigWorker()
     }
 }
 
