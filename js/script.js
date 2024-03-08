@@ -34,7 +34,7 @@ function confirmColor() {
 
 introPickColor()
 
-let money = 40              //40
+let money = 4000              //40
 let maling = 0              //0
 let mis = 0                 //0
 let malingPerClick = 1      //1
@@ -184,6 +184,19 @@ function buyFirstKost(element) {
         intMG()
     }
     update()
+}
+
+function changeWOrker() {
+    darkBk()
+    document.getElementById("changeWorker").style.display = "block"
+}
+
+function misWorker() {
+    if (workerRunning) {
+        maling += 1
+        mis += 1
+        
+    }
 }
 
 // function test() {
