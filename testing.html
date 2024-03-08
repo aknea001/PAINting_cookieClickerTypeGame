@@ -6,36 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <button onclick="stopFunc()">stop</button>
-    <button onclick="dTrue()">start maybe hopefully not yk smile :3</button>
-    <button onclick="startAgain()">start again</button>
+    <button onclick="test()">stop</button>
+    <p>location: <span id="coords"></span></p>
 
     <script>
-        let d = true
-
-        test()
-        function test() {
-            if (d) {
-                console.log("this shit is running")
-            }
-            else {
-                return
-            }
-            setTimeout(test, 20)
-        }
-
-        function stopFunc() {
-            d = false
-        }
-
-        function dTrue() {
-            d = true
-        }
-
-        function startAgain() {
-            d = true
-
-            test()
+        function test(event) {
+            document.getElementById("coords").innerText = event.clientX
         }
     </script>
 </body>
