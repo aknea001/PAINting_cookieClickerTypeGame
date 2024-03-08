@@ -64,9 +64,6 @@ function update() {
 
     // updateUpgrade()
 
-    money += parseFloat(localStorage.getItem("moneyFromMaling"))
-    localStorage.setItem("moneyFromMaling", 0)
-
     if (mis <= 0 && maling <= 0 && pigment <= 0 && money < pigmentPrice) {
         alert(`Ser ut som om du har soft locket degselv \n Her er ${pigmentPrice - money}kr for å få deg tilbake`)
         money += pigmentPrice - money
@@ -404,14 +401,16 @@ function checkFilled() {
 
     document.getElementById("MGDisplayPrc").innerText = filledPercentage
 
-    let amountEarned = (maxPenger * (filledPercentage / 100)).toFixed(1)
+    let amountEarned = parseFloat((maxPenger * (filledPercentage / 100)).toFixed(1))
 
     document.getElementById("x").innerText = maxPenger
     document.getElementById("y").innerText = filledPercentage
     document.getElementById("xy").innerText = amountEarned
     document.getElementById("amountEarned").innerText = amountEarned
 
-    localStorage.setItem("moneyFromMaling", amountEarned)
+    money += amountEarned
+
+    update()
     // setTimeout(restartMG, 500)
 }
 
