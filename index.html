@@ -37,6 +37,12 @@
             <p>Du tjente <span id="amountEarned">error</span>kr!</p>
             <button onclick="location.reload()">Tilbake</button>
         </div>
+
+        <div id="changeWorker">
+            <p>Hva vil du at arbeideren skal gjøre</p>
+            <button onclick="intWorker(0)">Lage maling</button>
+            <button onclick="intWorker(1)">Kjøp pigment</button>
+        </div>
     </div>
 
     <main>
@@ -51,33 +57,48 @@
         <p>Lagrings plass: <span id="storageLeft">100</span> / <span id="storageTotal">100</span></p>
     </main>
 
-<!-- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_buyBasicUpg(this, kost, maling per click, bedre sjanse selge, maling per pigment)-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_- -->
+<!-- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-buyBasicUpg(this, kost, maling per click, bedre sjanse selge, maling per pigment)-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_- -->
 
     <div id="basicUpg">
         <p>BASIC UPGRADES</p>
-        <div id="basicHammer" class="upgradeDiv">
+        <div class="upgradeDiv">
             <button onclick="buyBasicUpg(this, 300, 1, 0, 0)">Kjøp Basic Hammer (300kr)</button>
             <div class="toolTip">+1 maling per click</div>
         </div>
-        <div id="basicMpp" class="upgradeDiv">
+        <div class="upgradeDiv">
             <button onclick="buyBasicUpg(this, 500, 0, 0, 1)">Lei en Trollmann til å klone (500kr)</button>
             <div class="toolTip">Han kan bare klone pigment, Du får 2 maling per pigment</div>
         </div>
-        <div id="firstMalingKost" class="upgradeDiv">
+        <div class="upgradeDiv">
             <button onclick="buyFirstKost(this)">Kjøp en malingskost (1000kr)</button>
             <div class="toolTip">Du kan kanskje bruke den til noe (??)</div>
         </div>
-        
+        <div class="upgradeDiv">
+            <button onclick="buyBasicUpg(this, 1500, 0, 1, 2)">Bedre trollmann (1500kr)</button>
+            <div class="toolTip">Folk kommer for å se din trollman og han blir bedre</div>
+        </div>
     </div>
 
-<!-- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_malingUpg(this, penger upg, minus tid, width)-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_- -->
+<!-- -_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_malingUpg(this, pris, penger upg, minus tid, width)-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_- -->
 
 
     <div id="paintUpg">
         <p>MALING BUSINESS UPGRADES</p>
-        <div id="basicMalingMark" class="upgradeDiv">
-            <button onclick="malingUpg(this, 0.1, 0.1, 0)">Kjøp reklame (1250kr)</button>
+        <div class="upgradeDiv">
+            <button onclick="buyMalingUpg(this, 1250, 0.1, 0.5, 0)">Kjøp reklame (1250kr)</button>
             <div class="toolTip">Gir deg større sjanse for malings tilbud</div>
+        </div>
+        <div class="upgradeDiv">
+            <button onclick="buyMalingUpg(this, 1500, 0, 0, 10)">Kjøp en bedre malings kost (1500kr)</button>
+            <div class="toolTip">Gir deg en større kost</div>
+        </div>
+        <div class="upgradeDiv">
+            <button onclick="buyMalingUpg(this, 2000, 2.5, 0.5, 0)">Kjøp mer reklame (2000kr)</button>
+            <div class="toolTip">Større sjanse for malings tilbud</div>
+        </div>
+        <div class="upgradeDiv">
+            <button onclick="buyMalingUpg(this, 2222, 0, 0, 10)">Bedre malings kost (2222kr)</button>
+            <div class="toolTip">Veldig fin tooltip (gidder ikke å skrive fler tooltips sorry)</div>
         </div>
     </div>
 
@@ -108,7 +129,7 @@
     <div id="workersUpg">
         <p>WOKERS UPGRADES</p>
         <div class="upgradeDiv">
-            <button>Buy Basic Worker (1000kr)</button>
+            <button onclick="changeWOrker()">Buy Basic Worker (1000kr)</button>
             <div class="toolTip">Kjøp en worker som kan gjøre ting for deg</div>
         </div>
         
@@ -120,7 +141,6 @@
 
     <canvas style="position: absolute; z-index: -2; left: 0; top: 0;" id="bkCanvas"></canvas>
     <div style="z-index: -2;" id="paintBall">.</div>
-    <script src="js/canvas.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
