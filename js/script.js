@@ -48,6 +48,29 @@ let price = 20              //20
 let maxPrice = 50           //50
 
 let chanceMax = 50          //50
+
+// const colorPicker = new iro.ColorPicker("#colorPicker")
+// let pickedColor = localStorage.getItem("pickColor")
+
+// if (!pickedColor) {
+//     darkBk()
+//     document.getElementById("introColor").style.display = "flex"
+// }
+
+// function confirmColor() {
+//     if (colorPicker.color.hexString == "#ffffff") {
+//         document.getElementById("errorColor").innerText = "cmon be more creative, \n CHOOSE A DIFFERENT COLOR"
+//     }
+//     else {
+//         color = colorPicker.color.hexString
+//         darkBk()
+//         document.getElementById("introColor").style.display = "none"
+//         console.log(color)
+
+//         localStorage.setItem("pickColor", "value")
+//         localStorage.setItem("color", color)
+//     }
+// }
 let color
 
 let harKost = false         //false
@@ -81,9 +104,7 @@ function update() {
 //         document.getElementById("firstMalingKost").style.display = "block"
 //     }
 // }
-
 update()
-
 function clickPaint() {
     if (maling + malingPerClick <= storage && pigment >= malingPerClick / malingPerPigment) {
         maling += malingPerClick
@@ -236,6 +257,20 @@ function intWorker(num) {
 
 // test()
 
+// <<<<<<< HEAD
+// function queuePaintDrip() {
+//     if (maling >= 10) {
+//         dripPaint()
+//     }
+//     setTimeout(queuePaintDrip, 1000)
+// }
+
+// queuePaintDrip()
+
+// function reset() {
+//     localStorage.clear()
+//     location.reload()
+// =======
 const colorPicker = new iro.ColorPicker("#colorPicker")
 
 function qDrip() {
